@@ -160,7 +160,7 @@ class InsanelyFastWhisperInference(BaseTranscriptionPipeline):
         """
         openai_models = whisper.available_models()
         distil_models = ["distil-large-v2", "distil-large-v3", "distil-medium.en", "distil-small.en"]
-        default_models = openai_models + distil_models
+        default_models = openai_models + distil_models + ["vinai/PhoWhisper-large"]
 
         existing_models = os.listdir(self.model_dir)
         wrong_dirs = [".locks", "insanely_fast_whisper_models_will_be_saved_here"]
