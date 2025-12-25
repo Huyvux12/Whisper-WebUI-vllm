@@ -135,6 +135,9 @@ class FasterWhisperInference(BaseTranscriptionPipeline):
         """
         progress(0, desc="Initializing Model..")
 
+        if model_size == "vinai/PhoWhisper-large":
+            model_size = "kiendt/PhoWhisper-large-ct2"
+
         model_size_dirname = model_size.replace("/", "--") if "/" in model_size else model_size
         if model_size not in self.model_paths and model_size_dirname not in self.model_paths:
             print(f"Model is not detected. Trying to download \"{model_size}\" from huggingface to "
@@ -173,6 +176,7 @@ class FasterWhisperInference(BaseTranscriptionPipeline):
         Name list of models
         """
         model_paths = {model:model for model in faster_whisper.available_models()}
+        model_paths["vinai/PhoWhisper-large"] = "vinai/PhoWhisper-large"
         faster_whisper_prefix = "models--Systran--faster-whisper-"
 
         existing_models = os.listdir(self.model_dir)
